@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Intelligent Container</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  <style>
+    body {
+      padding-top: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .btn {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    .btn-success {
+      background-color: #5cb85c;
+      border-color: #4cae4c;
+    }
+    .btn-danger {
+      background-color: #d9534f;
+      border-color: #d43f3a;
+    }
+    #status-message {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Tajuk Projek : Intelligent Container</h1>
+  <button type="button" class="btn btn-success" onclick="openContainer()">Buka</button>
+  <button type="button" class="btn btn-danger" onclick="closeContainer()">Tutup</button>
+  <div id="status-message"></div>
+</div>
+
+<script>
+  function openContainer() {
+    $.get("https://sgp1.blynk.cloud/external/api/update?token=EVxDPRgNemtmdhNHMrPBWIIiIhKSST_X&v0=1")
+      .done((data) => {
+        console.log(data);
+        $('#status-message').text('Kontainer dibuka!');
+        $('#status-message').css('color', 'green');
+      })
+      .fail((jqXHR, textStatus, errorThrown) => {
+        console.error('Error:', textStatus, errorThrown);
+        $('#status-message').text('Gagal membuka kontainer. Silakan coba lagi.');
+        $('#status-message').css('color', 'red');
+      });
+  }
+
+  function closeContainer() {
+    $.get("https://sgp1.blynk.cloud/external/api/update?token=EVxDPRgNemtmdhNHMrPBWIIiIhKSST_X&v0=0")
+      .done((data) => {
+        console.log(data);
+        $('#status-message').text('Kontainer ditutup!');
+        $('#status-message').css('color', 'green');
+      })
+      .fail((jqXHR, textStatus, errorThrown) => {
+        console.error('Error:', textStatus, errorThrown);
+        $('#status-message').text('Gagal menutup kontainer. Silakan coba lagi.');
+        $('#status-message').css('color', 'red');
+      });
+  }
+</script>
+
+</body>
+</html>
